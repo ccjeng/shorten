@@ -1,11 +1,10 @@
 $(document).ready(function() {
         $("form").submit(function(e) {
             e.preventDefault();
-            var fullURL = $("#fullURL").val();
+            var fullURL = $("#fullURL").val().toLowerCase();
             var shortenURL = $("#shortenURL").val();
             
             var service = $("#service").find(":selected").val();
-            //var serviceText = $( "#service option:selected" ).text();
             
             //clean
             $("#error").text("");
@@ -16,13 +15,16 @@ $(document).ready(function() {
                 //Error
                 $("#form").removeClass("has-success").addClass("has-error");
                 $(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");    
+                $("#error").show();
                 $("#error").text("URL format is not correct");
+                $("#click-to-copy").hide();
         
             } else {
                 //Success
                 $("#form").removeClass("has-error").addClass("has-success");
                 $(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
-            
+                $("#error").hide();
+                $("#click-to-copy").show();
                 makeRequest();
             }
             
@@ -31,7 +33,9 @@ $(document).ready(function() {
 
         $("#clean").click(function() {
             $("#fullURL").val("");
+            $("#error").hide();
             $("#error").text("");
+            $("#click-to-copy").hide();
             $("#shortenURL").text("");
             $("#qrcode").text("");
             $("#form").removeClass("has-error").removeClass("has-success");
@@ -39,44 +43,49 @@ $(document).ready(function() {
         });
 
 
-        $("#copy").click(function() {
-            var copyTextarea = document.querySelector('.shortenURL');
-            copyTextarea.select();
+        //$("#click-to-copy").tooltip();
 
-          try {
-            var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copying text command was ' + msg);
-          } catch (err) {
-            console.log('Oops, unable to copy');
-          }
-        });
+        var client = new ZeroClipboard( $("#click-to-copy"), {
+              moviePath: "zeroclipboard/ZeroClipboard.swf",
+              debug: true
+        } );
 
-/*
-        $("#qrsize").change(function() {
-            if (shortenURL != null) {
-                    get_QRCode();
-            }
-        });*/
 
+        client.on( "load", function(client) {
+                client.on( "complete", function(client, args) {
+                    client.setText( args.text );                   
+                } );
+        } );
+
+
+       
 });
 
 function makeRequest() {
     var service = $("#service").find(":selected").val();
     switch (service) {
         case "g":
-            Google();
+            getGoogle();
             break;
         case "b":
-            Bitly();
+            getBitly();
             break;
+        case "t":
+            getTinyURL();
+            break;
+        case "i":
+            getIsgd();
+            break; 
+        case "v":
+            getVgd();
+            break;         
         default:
             Google();
             break;
     }
 }
-function Google() {
-        var fullURL = $("#fullURL").val();
+function getGoogle() {
+        var fullURL = $("#fullURL").val().toLowerCase();
         var request = gapi.client.urlshortener.url.insert({
           'resource': {
               'longUrl': fullURL
@@ -91,15 +100,16 @@ function Google() {
                 get_QRCode(s);
             }
             else {
+                $("#error").show();
                 $("#error").text("error: creating short url: goo.gl");
             }
         });
 }
 
-function Bitly() {
+function getBitly() {
         var username = "o_4qkhbs5vl0";
         var key = "R_3773937f1ac64e88ae4fe130d6356681";
-        var fullURL = $("#fullURL").val();
+        var fullURL = $("#fullURL").val().toLowerCase();
 
         $.ajax({
             url:"http://api.bit.ly/v3/shorten",
@@ -111,20 +121,66 @@ function Bitly() {
                 get_QRCode(s);
             },
             error: function(){
+                $("#error").show();
                 $("#error").text("error: creating short url: bit.ly");
             }
         });
 
 }
 
+function getTinyURL() {
+        var fullURL = $("#fullURL").val().toLowerCase();
+
+        $.getJSON(
+          "http://urltinyfy.appspot.com/tinyurl?url="+fullURL+"&callback=?",
+          //{url: fullURL},
+          function(data){
+                var s =data.tinyurl;
+                    $("#shortenURL").text(s);
+                    get_QRCode(s);
+          }
+        );
+}
+
+function getIsgd() {
+        var fullURL = $("#fullURL").val().toLowerCase();
+
+        $.getJSON(
+          "http://urltinyfy.appspot.com/isgd?url="+fullURL+"&callback=?",
+          //{url: fullURL},
+          function(data){
+                var s =data.tinyurl;
+                    $("#shortenURL").text(s);
+                    get_QRCode(s);
+          }
+        );
+}
+
+function getVgd()  {
+        var fullURL = $("#fullURL").val().toLowerCase();
+
+        $.getJSON(
+          "http://urltinyfy.appspot.com/vgd?url="+fullURL+"&callback=?",
+          //{url: fullURL},
+          function(data){
+                var s =data.tinyurl;
+                    $("#shortenURL").text(s);
+                    get_QRCode(s);
+          }
+        );
+}
+
 function load() {
+        $("#error").hide();
+        $("#error").addClass("isa_error");        
+        $("#click-to-copy").hide();
+
         gapi.client.setApiKey('AIzaSyAFPETEhOLJGMLUq9Ql_o3lyJtvJ5IUaqo');
         gapi.client.load('urlshortener', 'v1', function(){});
 }
 window.onload = load;
     
 function get_QRCode(text) {
-    //var text = $("#shortenURL").val();
     
     console.log("text= " + text);
 
@@ -142,7 +198,7 @@ function isUrl(url) {
         + "([0-9a-z_!~*'()-]+\.)*" // 域名- www.
         + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." // 二级域名
         + "[a-z]{2,6})" // first level domain- .com or .museum
-        + "(:[0-9]{1,4})?" // 端口- :80
+        //+ "(:[0-9]{1,4})?" // 端口- :80
         + "((/?)|" // a slash isn't required if there is no file name
         + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
      var re=new RegExp(strRegex);

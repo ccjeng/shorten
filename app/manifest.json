@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "URL Shortener",
+  "description": "Shorten your long URL link",
+  "version": "1.0",
+
+  "icons": { "128": "icon.png" }, 
+  "app": { 
+    "urls": [ 
+    "http://shorten.ccjeng.com/" 
+    ], 
+    "launch": {"web_url": "http://shorten.ccjeng.com/" } 
+  }, 
+
+  "permissions": [
+    "activeTab",
+    "http://shorten.ccjeng.com/"
+  ]
+}

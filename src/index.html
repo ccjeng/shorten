@@ -10,25 +10,26 @@
     <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<!--
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <link rel='stylesheet' href="./css/all.css">
 
-        ga('create', 'UA-19743390-8', 'auto');
-        ga('send', 'pageview');
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-19743390-16', 'auto');
+      ga('send', 'pageview');
+
     </script>
--->
 </head>
 <body>
 <br/>
 <br/>
 
+<h1 class="logo">URL Shortener!</h1>
 <div class="form-group" id="form" style="text-align:center;">
     <form role="form" action="">
-        <img src=".\img\icon.png"/><h2>URL Shortener</h2>
         <p></p>
         <div class="form-group has-feedback ">
             <input type="text" id="fullURL" class="form-control" value="" placeholder="Paste URL here.."/>          
@@ -37,28 +38,28 @@
 
         <select id="service">
           <option value="g">goo.gl</option>
+          <option value="t">TinyURL</option>
           <option value="b">bit.ly</option>
+          <option value="i">is.gd</option>
+          <option value="v">v.gd</option>
         </select>
 
-<!--
-        <select id = "qrsize">
-          <option value="s">QRCode small</option>
-          <option value="m">QRCode middle</option>
-          <option value="b">QRCode big</option>
-          <option value="l">QRCode large</option>
-        </select>-->
         
         <input type="submit" class="btn btn-primary" value="Shorten">
-        <input type="button" class="btn btn-primary" id="clean" value="Clean">
+        <input type="button" class="btn btn-primary" id="clean" value="Reset">
 
     </form>
 </div>
 
 
+<div id="error"></div>
 
-<div class="row" id="result" style="text-align:center;">
-    <div id="error"></div>
-    <div id="shortenURL"></div><button id="copy">Copy</button>
+
+<div id="result" style="text-align:center;">
+    <div class="row">
+        <div id="shortenURL"></div>
+        <button id="click-to-copy" class="fa fa-clipboard fa-lg" data-clipboard-target="shortenURL" data-toggle="tooltip" data-placement="left" data-original-title="Copy to Clipboard"></button>
+    </div>
     <br/>
     <div id="qrcode"></div>
 </div>
@@ -66,6 +67,7 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="http://cdn.rawgit.com/jeromeetienne/jquery-qrcode/master/jquery.qrcode.min.js"</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdn.rawgit.com/zeroclipboard/zeroclipboard/master/dist/ZeroClipboard.min.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
 <script src="./js/all.min.js"></script>
 
