@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700' type='text/css'>
     <link rel='stylesheet' href="./css/all.css">
 
     <script>
@@ -39,7 +38,10 @@
 
         <select id="service">
           <option value="g">goo.gl</option>
+          <option value="t">TinyURL</option>
           <option value="b">bit.ly</option>
+          <option value="i">is.gd</option>
+          <option value="v">v.gd</option>
         </select>
 
         
@@ -50,10 +52,14 @@
 </div>
 
 
+<div id="error"></div>
 
-<div class="row" id="result" style="text-align:center;">
-    <div id="error"></div>
-    <div id="shortenURL"></div><!--<button id="copy">Copy</button>-->
+
+<div id="result" style="text-align:center;">
+    <div class="row">
+        <div id="shortenURL"></div>
+        <button id="click-to-copy" class="fa fa-clipboard fa-lg" data-clipboard-target="shortenURL" data-toggle="tooltip" data-placement="left" data-original-title="Copy to Clipboard"></button>
+    </div>
     <br/>
     <div id="qrcode"></div>
 </div>
@@ -61,6 +67,7 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="http://cdn.rawgit.com/jeromeetienne/jquery-qrcode/master/jquery.qrcode.min.js"</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdn.rawgit.com/zeroclipboard/zeroclipboard/master/dist/ZeroClipboard.min.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
 <script src="./js/all.min.js"></script>
 
