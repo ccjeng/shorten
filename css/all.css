@@ -8,6 +8,14 @@ h1.logo {
   font-size: 75px;
 }
 
+#click-to-copy {
+  display: none;
+}
+
+#shortenURL {
+  color: Green;
+}
+
 .isa_info,
 .isa_success,
 .isa_warning,
