@@ -5,12 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     
-    <title>URL Shortener</title>   
+    <title>URL Shortener!</title>   
     
     <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel='stylesheet' href="./css/all.css">
+
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdn.rawgit.com/zeroclipboard/zeroclipboard/master/dist/ZeroClipboard.min.js"></script>
+    <script src="http://cdn.rawgit.com/jeromeetienne/jquery-qrcode/master/jquery.qrcode.min.js"</script>
+
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -43,7 +50,6 @@
           <option value="i">is.gd</option>
           <option value="v">v.gd</option>
         </select>
-
         
         <input type="submit" class="btn btn-primary" value="Shorten">
         <input type="button" class="btn btn-primary" id="clean" value="Reset">
@@ -70,17 +76,13 @@
 <div id="result" style="text-align:center;">
     <div class="row">
         <div id="shortenURL"></div>
-        <button id="click-to-copy" class="fa fa-clipboard fa-lg" data-clipboard-target="shortenURL" data-toggle="tooltip" data-placement="left" data-original-title="Copy to Clipboard"></button>
+        <button id="click-to-copy" class="fa fa-clipboard fa-lg" type="button" data-clipboard-target="shortenURL" title="Copy to Clipboard" data-placement='right'></button>
     </div>
     <br/>
     <div id="qrcode"></div>
 </div>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="http://cdn.rawgit.com/jeromeetienne/jquery-qrcode/master/jquery.qrcode.min.js"</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="http://cdn.rawgit.com/zeroclipboard/zeroclipboard/master/dist/ZeroClipboard.min.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=init"></script>
+
 <script src="./js/all.min.js"></script>
 
 </body>
