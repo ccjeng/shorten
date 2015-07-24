@@ -24,8 +24,8 @@ $(document).ready(function() {
                 $("#form").removeClass("has-error").addClass("has-success");
                 $(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
                 $("#error").hide();
-                $("#click-to-copy").show();
                 makeRequest();
+                $("#click-to-copy").show();
             }
             
 
@@ -43,11 +43,10 @@ $(document).ready(function() {
         });
 
 
-        //$("#click-to-copy").tooltip();
 
         var client = new ZeroClipboard( $("#click-to-copy"), {
-              moviePath: "zeroclipboard/ZeroClipboard.swf",
-              debug: true
+              moviePath: "./flash/ZeroClipboard.swf",
+              debug: false
         } );
 
 
@@ -57,7 +56,7 @@ $(document).ready(function() {
                 } );
         } );
 
-
+        $("#click-to-copy").tooltip();
        
 });
 
@@ -132,7 +131,7 @@ function getTinyURL() {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/tinyurl?url="+fullURL+"&callback=?",
+          "http://urltinyfy.appspot.com/tinyurl?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
@@ -146,7 +145,7 @@ function getIsgd() {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/isgd?url="+fullURL+"&callback=?",
+          "http://urltinyfy.appspot.com/isgd?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
@@ -160,7 +159,7 @@ function getVgd()  {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/vgd?url="+fullURL+"&callback=?",
+          "http://urltinyfy.appspot.com/vgd?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
@@ -182,7 +181,7 @@ window.onload = load;
     
 function get_QRCode(text) {
     
-    console.log("text= " + text);
+    //console.log("text= " + text);
 
     var size = 120;
             
