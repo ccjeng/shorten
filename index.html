@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     
-    <title>Shortener Me!</title>   
+    <title>Shorten Me!</title>   
     
     <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -27,17 +27,18 @@
     </script>
     <!-- End Google Analytics -->
 
+
 </head>
 <body>
 <br/>
 <br/>
 
-<h1 class="logo">Shortener Me!</h1>
+<h1 class="logo">Shorten Me!</h1>
 <div class="form-group container" id="form" style="text-align:center;">
     <form role="form" action="">
         <p></p>
         <div class="form-group has-feedback ">
-            <input type="text" id="fullURL" class="form-control" value="" placeholder="Paste URL here.."/>          
+            <input type="text" id="fullURL" class="form-control" value="" placeholder="Please paste a URL to shorten.."/>          
             <span class="glyphicon form-control-feedback"></span>
         </div>
 
@@ -67,7 +68,7 @@
      data-ad-format="auto"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>-
+</script>
 
 
 <br/>
@@ -79,6 +80,22 @@
     <br/>
     <div id="qrcode"></div>
 </div>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=914645301919009";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<footer class="footer" style="text-align: center; padding-top: 20px;">
+            <div class="pull-left fb-like" data-href="http://shorten.ccjeng.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            <p>Copyright © 2015 <a href="/">Shorten Me!</a>. All Rights Reserved</p>
+            <!--<p><small>Shorten Me! is developed and maintained by Andy Cheng</small></p>-->
+</footer>
 
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
 <script src="./js/all.min.js"></script>
