@@ -1,9 +1,9 @@
 // Modules & Plugins
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var myth = require('gulp-myth');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
+var cssminify = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 var connect = require('gulp-connect'); 
 var livereload = require('gulp-livereload');
@@ -13,7 +13,6 @@ var notify = require('gulp-notify');
 
 // Error Helper
 function onError(err) {
-    //beeper();
     console.log(err);
 }
 
@@ -28,8 +27,10 @@ gulp.task('server', function() {
 // Styles Task
 gulp.task('styles', function() {
     return gulp.src('src/css/*.css')
-        .pipe(concat('all.css'))
-        .pipe(myth())
+        .pipe(sourcemaps.init())
+        .pipe(concat('all.min.css'))
+        .pipe(cssminify())  
+        .pipe(sourcemaps.write())      
         .pipe(gulp.dest('server/css'))
         .pipe(notify({ message: 'Styles task complete' }));
 });

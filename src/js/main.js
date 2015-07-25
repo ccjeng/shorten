@@ -24,8 +24,7 @@ $(document).ready(function() {
                 $("#form").removeClass("has-error").addClass("has-success");
                 $(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
                 $("#error").hide();
-                makeRequest();
-                $("#click-to-copy").show();
+                makeRequest();                
             }
             
 
@@ -41,7 +40,6 @@ $(document).ready(function() {
             $("#form").removeClass("has-error").removeClass("has-success");
             $(".glyphicon").removeClass("glyphicon-remove").removeClass("glyphicon-ok");
         });
-
 
 
         var client = new ZeroClipboard( $("#click-to-copy"), {
@@ -62,6 +60,9 @@ $(document).ready(function() {
 
 function makeRequest() {
     var service = $("#service").find(":selected").val();
+    var serviceName = $("#service").find(":selected").text();
+    ga('send', 'event', 'service', 'click', serviceName, 0);
+
     switch (service) {
         case "g":
             getGoogle();
@@ -93,9 +94,10 @@ function getGoogle() {
 
         request.execute(function(response) {
         
-            if(response.id != null) {
+            if(!isEmpty(response.id)) {
                 var s = response.id;
                 $("#shortenURL").text(s);
+                $("#click-to-copy").show();
                 get_QRCode(s);
             }
             else {
@@ -117,6 +119,7 @@ function getBitly() {
             success:function(v) {
                 var s =v.data.url;
                 $("#shortenURL").text(s);
+                $("#click-to-copy").show();
                 get_QRCode(s);
             },
             error: function(){
@@ -136,9 +139,13 @@ function getTinyURL() {
           function(data){
                 var s =data.tinyurl;
                     $("#shortenURL").text(s);
+                    $("#click-to-copy").show();
                     get_QRCode(s);
           }
-        );
+        ).fail(function(jqXHR, textStatus, errorThrown) { 
+            $("#error").show();
+            $("#error").text("error: creating short url: TinyURL");
+        });
 }
 
 function getIsgd() {
@@ -150,9 +157,13 @@ function getIsgd() {
           function(data){
                 var s =data.tinyurl;
                     $("#shortenURL").text(s);
+                    $("#click-to-copy").show();
                     get_QRCode(s);
           }
-        );
+        ).fail(function(jqXHR, textStatus, errorThrown) { 
+            $("#error").show();
+            $("#error").text("error: creating short url: is.gd");
+        });
 }
 
 function getVgd()  {
@@ -164,9 +175,13 @@ function getVgd()  {
           function(data){
                 var s =data.tinyurl;
                     $("#shortenURL").text(s);
+                    $("#click-to-copy").show();
                     get_QRCode(s);
           }
-        );
+        ).fail(function(jqXHR, textStatus, errorThrown) { 
+            $("#error").show();
+            $("#error").text("error: creating short url: v.gd");
+        });
 }
 
 function load() {
@@ -181,12 +196,10 @@ window.onload = load;
     
 function get_QRCode(text) {
     
-    //console.log("text= " + text);
-
     var size = 120;
-            
-    jQuery('#qrcode').qrcode({width: size ,height: size ,text: text});
-
+    if (!isEmpty(text)) {   
+        jQuery('#qrcode').qrcode({width: size ,height: size ,text: text});
+    }
 }    
 
 function isUrl(url) {
@@ -204,3 +217,6 @@ function isUrl(url) {
      return re.test(url);
 }
 
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
