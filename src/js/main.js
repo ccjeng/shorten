@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+        //Shorten Button
         $("form").submit(function(e) {
             e.preventDefault();
             var fullURL = $("#fullURL").val().toLowerCase();
@@ -30,6 +32,7 @@ $(document).ready(function() {
 
         });
 
+        //Clean Button
         $("#clean").click(function() {
             $("#fullURL").val("");
             $("#error").hide();
@@ -41,12 +44,11 @@ $(document).ready(function() {
             $(".glyphicon").removeClass("glyphicon-remove").removeClass("glyphicon-ok");
         });
 
-
+        //Copy to Clipboard
         var client = new ZeroClipboard( $("#click-to-copy"), {
               moviePath: "./flash/ZeroClipboard.swf",
               debug: false
         } );
-
 
         client.on( "load", function(client) {
                 client.on( "complete", function(client, args) {
@@ -54,14 +56,24 @@ $(document).ready(function() {
                 } );
         } );
 
+        //Copy to Clipboard Tooltip
         $("#click-to-copy").tooltip();
+
+        //Facebook Like Button
+        (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=914645301919009";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
        
 });
 
 function makeRequest() {
     var service = $("#service").find(":selected").val();
-    var serviceName = $("#service").find(":selected").text();
-    ga('send', 'event', 'service', 'click', serviceName, 0);
+    //var serviceName = $("#service").find(":selected").text();
+    //ga('send', 'event', 'service', 'click', serviceName, 0);
 
     switch (service) {
         case "g":
