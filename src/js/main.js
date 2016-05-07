@@ -125,7 +125,7 @@ function getBitly() {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.ajax({
-            url:"http://api.bit.ly/v3/shorten",
+            url:"https://api-ssl.bitly.com/v3/shorten",
             data:{longUrl:fullURL,apiKey:key,login:username},
             dataType:"jsonp",
             success:function(v) {
@@ -146,7 +146,7 @@ function getTinyURL() {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/tinyurl?url="+encodeURIComponent(fullURL)+"&callback=?",
+          "https://urltinyfy.appspot.com/tinyurl?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
@@ -164,7 +164,7 @@ function getIsgd() {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/isgd?url="+encodeURIComponent(fullURL)+"&callback=?",
+          "https://urltinyfy.appspot.com/isgd?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
@@ -182,7 +182,7 @@ function getVgd()  {
         var fullURL = $("#fullURL").val().toLowerCase();
 
         $.getJSON(
-          "http://urltinyfy.appspot.com/vgd?url="+encodeURIComponent(fullURL)+"&callback=?",
+          "https://urltinyfy.appspot.com/vgd?url="+encodeURIComponent(fullURL)+"&callback=?",
           //{url: fullURL},
           function(data){
                 var s =data.tinyurl;
