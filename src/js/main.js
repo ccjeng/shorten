@@ -44,20 +44,19 @@ $(document).ready(function() {
             $(".glyphicon").removeClass("glyphicon-remove").removeClass("glyphicon-ok");
         });
 
-        //Copy to Clipboard
-        var client = new ZeroClipboard( $("#click-to-copy"), {
-              moviePath: "./flash/ZeroClipboard.swf",
-              debug: false
-        } );
+        var clipboard = new Clipboard("#click-to-copy");
 
-        client.on( "load", function(client) {
-                client.on( "complete", function(client, args) {
-                    client.setText( args.text );                   
-                } );
-        } );
+        clipboard.on('success', function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            //console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
 
         //Copy to Clipboard Tooltip
         $("#click-to-copy").tooltip();
+
+
 
         //Facebook Like Button
         (function(d, s, id) {
