@@ -83,15 +83,9 @@ function makeRequest() {
             break;
         case "t":
             getTinyURL();
-            break;
-        case "i":
-            getIsgd();
-            break; 
-        case "v":
-            getVgd();
-            break;         
+            break;       
         default:
-            Google();
+            getGoogle();
             break;
     }
 }
