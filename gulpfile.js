@@ -2,7 +2,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var jshint = require('gulp-jshint');
 var cssminify = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 var connect = require('gulp-connect'); 
@@ -45,8 +44,6 @@ gulp.task('html', function () {
 gulp.task('scripts', function() {
     return gulp.src('src/js/*.js')
         .pipe(sourcemaps.init())
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
         .pipe(concat('all.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write())
