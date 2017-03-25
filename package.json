@@ -1,5 +1,5 @@
 {
-  "name": "trash",
+  "name": "shorten",
   "main": "server.js",
   "dependencies": {},
   "devDependencies": {
@@ -8,12 +8,22 @@
     "gulp-clean-css": "^3.0.3",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-imagemin": "^3.1.1",
-    "gulp-jshint": "^2.0.4",
     "gulp-livereload": "^3.8.1",
     "gulp-notify": "^3.0.0",
     "gulp-uglify": "^2.1.0",
-    "gulp-watch": "^4.3.11",
-    "jshint": "^2.9.4"
+    "gulp-watch": "^4.3.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccjeng/shorten.git"
+  },
+  "author": "ccjeng",
+  "license": "MIT",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "deploy": "gulp deploy"
   }
 }
